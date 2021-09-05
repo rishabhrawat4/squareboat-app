@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Card, Button, Row, Col, Form, InputGroup, Alert, Spinner } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./Style/HomeScreenStyle.css";
 import { userTypeInputAction, fullNameInputAction, emailInputAction, passwordInputAction, confirmPasswordInputAction, skillsInputAction, signUpFailedAction, signUpSuccessAction } from '../Actions/SignUpActions'
 import { loginDataAction } from '../Actions/LoginAction';
 import { connect } from "react-redux";
@@ -23,13 +22,12 @@ class SignUpScreen extends React.Component{
       } else{
         this.props.signUpFailedAction(true)
       }
-        
     })
-    console.log(this.props.signUp)
   }
   render(){
     return (
-      <Container fluid className="container-bg">
+      <Container fluid className="padding-zero">
+        <Container fluid className="container-style">
         <Header />
         <Row className="justify-content-md-center ">
           <Col xs={12} md="auto" className="my-3">
@@ -39,7 +37,7 @@ class SignUpScreen extends React.Component{
             <span className="visually-hidden">Loading...</span>
           </Spinner>
           :
-          <Card>
+          <Card className="shadow">
             <Card.Header>Sign Up</Card.Header>
             <Card.Body>
             <Form>
@@ -127,7 +125,7 @@ class SignUpScreen extends React.Component{
           }
           </Col>
         </Row>
-
+        </Container>
       </Container>
     )
   }

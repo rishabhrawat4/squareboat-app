@@ -18,7 +18,6 @@ import { logoutAction } from '../Actions/LoginAction';
 class Header extends React.Component{
   onLogoutButtonClicked = () => {
     this.props.logoutAction()
-    console.log(this.props.login)
   }
   render(){
     return(

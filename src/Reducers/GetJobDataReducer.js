@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   jobDataArray: null,
-  showApplication: false
+  showApplication: false,
+  totalCount: 0
 }
 const GetJobDataReducer = (state = INITIAL_STATE, action) => {
   switch(action.type){
@@ -18,6 +19,11 @@ const GetJobDataReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         showApplication: false
+      };
+    case "setTotalCount":
+      return {
+        ...state,
+        totalCount: action.payload
       };
     default: 
       return state;

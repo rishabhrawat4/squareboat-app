@@ -1,6 +1,5 @@
 import React from 'react';
 import "./Style/HomeScreenStyle.css";
-import LoginForm from './LoginScreen';
 import { 
   Container,
   Row,
@@ -12,31 +11,32 @@ import {
   Button
 } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SignUpScreen from './SignUpScreen';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import GetJobApi from '../Api/GetJobApi';
-import { getJobDataAction, showApplicationsAction } from '../Actions/GetJobActions';
+import { getJobDataAction, showApplicationsAction, setTotalCountAction } from '../Actions/GetJobActions';
 import ApplicationScreen from './ApplicationScreen';
+import ReactPaginate from 'react-paginate';
+import './Style/JobPostingScreenStyle.css';
 
 class JobPostingScreen extends React.Component {
   componentDidMount(){
-    var resp = GetJobApi();
+    var resp = GetJobApi(1);
     resp.then((result) => {
-      this.props.getJobDataAction(result)
+      this.props.getJobDataAction(result.data)
+      this.props.setTotalCountAction(result.totalCount)
     })
     
   }
 
   onButtonClicked = () => {
     this.props.showApplicationsAction()
-    console.log(this.props.getJob)
-
   }
+  
   renderItems = (item) => {
     return (
-      <Card className="col-3 m-3">
+      <Card className="col-3 m-3 shadow">
         <Card.Body>
           <Card.Title>{item.title}</Card.Title>
           {/* <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle> */}
@@ -52,6 +52,13 @@ class JobPostingScreen extends React.Component {
 
       </Card>
     )
+  }
+
+  handlePageClick = (e) => {
+    var resp = GetJobApi(e.selected+1);
+    resp.then((result) => {
+      this.props.getJobDataAction(result.data)
+    })
   }
   render(){
     return (
@@ -86,6 +93,21 @@ class JobPostingScreen extends React.Component {
         null
         }
 
+        <div className="paginate-container">
+          <ReactPaginate
+            previousLabel={"<< Prev"}
+            nextLabel={"Next >>"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={Math.ceil(this.props.getJob.totalCount/20)}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+          />
+        </div>
       </Container>
       
     )
@@ -99,7 +121,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getJobDataAction: (payload) => dispatch(getJobDataAction(payload)),
-  showApplicationsAction: () => dispatch(showApplicationsAction())
+  showApplicationsAction: () => dispatch(showApplicationsAction()),
+  setTotalCountAction: (payload) => dispatch(setTotalCountAction(payload))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(JobPostingScreen));

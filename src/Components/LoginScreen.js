@@ -16,12 +16,10 @@ class LoginForm extends React.Component{
     super(props);
   }
   onEmailChange = (event) => {
-    // console.log("email: ", event.target.value);
     this.props.emailInputAction(event.target.value)
   }
 
   onPasswordChange = (event) => {
-    // console.log("password: ", event.target.value)
     this.props.passwordInputAction(event.target.value)
   }
 
@@ -39,8 +37,6 @@ class LoginForm extends React.Component{
         this.props.loginFailedAction(true)
       }
     })
-
-    console.log(this.props.login)
   }
 
   onDemoClicked = () => {
@@ -48,7 +44,8 @@ class LoginForm extends React.Component{
   }
   render(){
     return (
-      <Container fluid className="container-bg">
+      <Container fluid className="padding-zero">
+        <Container fluid className="container-style">
         <Header />
         <Row className="justify-content-md-center">
           <Col xs={12} md="auto">
@@ -58,7 +55,7 @@ class LoginForm extends React.Component{
             <span className="visually-hidden">Loading...</span>
           </Spinner>
           :
-          <Card>
+          <Card className="shadow">
             <Card.Header>Login</Card.Header>
             <Card.Body>
             <Form>
@@ -109,7 +106,7 @@ class LoginForm extends React.Component{
   }
           </Col>
         </Row>
-
+        </Container>
       </Container>
     )
   }

@@ -12,6 +12,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
+    <div className="background">
     <Switch>
       <Route path="/" component={HomeScreen} exact />
       <Route path="/login" component={LoginScreen} />
@@ -22,6 +23,7 @@ function App() {
       <Route path="/resetPassword" component={ResetPasswordScreen} />
       <Route path="/applications" component={ApplicationScreen} />
     </Switch>
+    </div>
   );
 }
 

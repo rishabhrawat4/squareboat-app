@@ -24,11 +24,11 @@ class PostJobScreen extends React.Component{
       }
         
     })
-    console.log(this.props.signUp)
   }
   render(){
     return (
-      <Container fluid className="container-bg">
+      <Container fluid className="padding-zero">
+        <Container fluid className="container-style">
         <Header />
         <Row className="justify-content-md-center">
           <Col xs={6} md="auto">
@@ -38,7 +38,7 @@ class PostJobScreen extends React.Component{
             <span className="visually-hidden">Loading...</span>
           </Spinner>
           :
-          <Card>
+          <Card className="shadow">
             <Card.Header>Post A Job</Card.Header>
             <Card.Body>
             <Form>
@@ -82,7 +82,7 @@ class PostJobScreen extends React.Component{
           }
           </Col>
         </Row>
-
+        </Container>
       </Container>
     )
   }

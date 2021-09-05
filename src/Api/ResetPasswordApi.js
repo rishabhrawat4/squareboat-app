@@ -7,7 +7,6 @@ const ResetPasswordApi = async (password, confirmPassword, token) => {
       confirmPassword: confirmPassword,
       token: token
   }).then((response) => {
-    console.log(response)
     resp = response.data.data
   })
   .catch(err => {

@@ -24,7 +24,6 @@ class ResetPasswordScreen extends React.Component{
       }
         
     })
-    console.log(this.props.forgotPassword)
   }
   render(){
     return (

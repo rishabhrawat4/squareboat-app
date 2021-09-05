@@ -16,3 +16,10 @@ export const hideApplicationsAction = () => {
     type: 'hideApplications',
   }
 }
+
+export const setTotalCountAction = (val) => {
+  return {
+    type: 'setTotalCount',
+    payload: val
+  }
+}

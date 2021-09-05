@@ -7,7 +7,6 @@ const VerifyEmailApi = async (email) => {
       email: email
     }
   }).then((response) => {
-    console.log(response)
     resp = response.data.data
   })
   .catch(err => {

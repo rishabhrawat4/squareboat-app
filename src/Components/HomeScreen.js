@@ -21,10 +21,6 @@ import Header from './Header';
 class HomeScreen extends React.Component{
   onLogoutButtonClicked = () => {
     this.props.logoutAction()
-    console.log(this.props.login)
-  }
-  componentDidMount(){
-    console.log("forgotPassword: ", this.props.forgotPassword)
   }
 
   renderHomeScreen = () => {
@@ -49,9 +45,9 @@ class HomeScreen extends React.Component{
         </Row>
         <Row className="my-3">
           <Col>
-          <Card>
+          <Card className="shadow">
             <Card.Body> 
-              <Card.Text>
+              <Card.Text className="card-heading">
                 <h2>Get More Visibility</h2>
               </Card.Text>
               <Card.Text>
@@ -61,9 +57,9 @@ class HomeScreen extends React.Component{
           </Card>
           </Col>
           <Col>
-          <Card>
+          <Card className="shadow">
             <Card.Body> 
-              <Card.Text>
+            <Card.Text className="card-heading">
                 <h2>Get More Visibility</h2>
               </Card.Text>
               <Card.Text>
@@ -73,9 +69,9 @@ class HomeScreen extends React.Component{
           </Card>
           </Col>
           <Col>
-          <Card>
+          <Card className="shadow">
             <Card.Body> 
-              <Card.Text>
+            <Card.Text className="card-heading">
                 <h2>Get More Visibility</h2>
               </Card.Text>
               <Card.Text>
@@ -125,16 +121,17 @@ class HomeScreen extends React.Component{
   }
   render(){
     return(
-      <Container fluid className="container-bg">
-        <Header />
-        { this.props.login.hasLogin 
-        ?
-        <JobPostingScreen /> 
-        :
-        this.renderHomeScreen()
-        }
+      <Container fluid className="padding-zero">
+        <Container fluid className="container-style">
+          <Header />
+          { this.props.login.hasLogin 
+          ?
+          <JobPostingScreen /> 
+          :
+          this.renderHomeScreen()
+          }
+        </Container>
       </Container>
-      
     )
   }
 }

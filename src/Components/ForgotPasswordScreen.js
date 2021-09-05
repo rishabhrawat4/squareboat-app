@@ -22,7 +22,6 @@ class ForgotPasswordScreen extends React.Component{
         // this.props.signUpFailedAction(true)
         this.props.failureEmailVerificationAction()
       }
-      console.log(this.props.forgotPassword)
     })    
   }
   render(){

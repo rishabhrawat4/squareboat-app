@@ -21,24 +21,23 @@ import GetJobApi from '../Api/GetJobApi';
 import { getJobDataAction, hideApplicationsAction } from '../Actions/GetJobActions';
 
 class ApplicationScreen extends React.Component {
-  
 
-  onButtonClicked = () => {
-    console.log(this.props.getJob)
-  }
   
   render(){
     return (
       <Container className="main-container">
         <Row>
           <Col>
-            <Card className="col-8 mx-auto">
+            <Card className="col-8 mx-auto shadow-lg">
               <Card.Body>
-                <Card.Title className="d-flex justify-content-between">
+                <Card.Title className="d-flex justify-content-between border-bottom">
                   <span>Applications for this job</span>
                   <Button onClick={() => this.props.hideApplicationsAction()}>Close</Button>
                 </Card.Title>
                 <Card.Title>0 Applications</Card.Title>
+                <Card.Title className="empty-application">
+                  No Application Available
+                </Card.Title>
               </Card.Body>
             </Card>
           </Col>

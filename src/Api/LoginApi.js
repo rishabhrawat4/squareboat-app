@@ -6,7 +6,6 @@ const LoginApi = async (email, password) => {
       email,
       password
   }).then((response) => {
-    console.log(response)
     resp = response.data.data
   })
   .catch(err => {
