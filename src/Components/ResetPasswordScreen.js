@@ -27,7 +27,8 @@ class ResetPasswordScreen extends React.Component{
   }
   render(){
     return (
-      <Container fluid className="container-bg">
+      <Container fluid fluid className="padding-zero">
+      <Container fluid className="container-style">
         <Header />
         <Row className="justify-content-md-center">
           <Col xs={6} md="auto">
@@ -71,7 +72,7 @@ class ResetPasswordScreen extends React.Component{
           }
           </Col>
         </Row>
-
+        </Container>
       </Container>
     )
   }

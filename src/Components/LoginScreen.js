@@ -55,6 +55,11 @@ class LoginForm extends React.Component{
             <span className="visually-hidden">Loading...</span>
           </Spinner>
           :
+          this.props.login.hasLogin ?
+          <Card className="shadow">
+            <Card.Header>You are already logged in</Card.Header>
+          </Card>
+          :
           <Card className="shadow">
             <Card.Header>Login</Card.Header>
             <Card.Body>
@@ -64,6 +69,7 @@ class LoginForm extends React.Component{
                   <Form.Control 
                     className={this.props.login.loginFailed ? "border-error" : null}
                     type="email" 
+                    value={this.props.login.email}
                     placeholder="Enter email" 
                     onChange={this.onEmailChange} 
                   />
@@ -74,6 +80,7 @@ class LoginForm extends React.Component{
                 <Form.Control 
                   className={this.props.login.loginFailed ? "border-error" : null}
                   type="password"
+                  value={this.props.login.password}
                   placeholder="Password" 
                   onChange={this.onPasswordChange}
                 />
@@ -103,7 +110,8 @@ class LoginForm extends React.Component{
             </Card.Text>
             </Card.Body>
           </Card>
-  }
+          
+  }       
           </Col>
         </Row>
         </Container>

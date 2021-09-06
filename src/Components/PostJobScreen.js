@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Card, Button, Row, Col, Form, InputGroup, Alert, Spinner } from 'react-bootstrap';
+import { Container, Card, Button, Row, Col, Form, InputGroup, Alert, Spinner, Breadcrumb } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Style/HomeScreenStyle.css";
 import { connect } from "react-redux";
@@ -13,7 +13,7 @@ import { jobTitleInputAction,
   successPostJobAction, 
   failurePostJobAction 
 } from '../Actions/PostJobAction'
-
+import { Link } from 'react-router-dom'
 class PostJobScreen extends React.Component{
 
   onSignUpButtonClicked = () => {
@@ -25,7 +25,6 @@ class PostJobScreen extends React.Component{
         this.props.history.push('/')
       } else{
         this.props.failurePostJobAction()
-        console.log(this.props.postJob)
       }
        
     })
@@ -36,6 +35,14 @@ class PostJobScreen extends React.Component{
       <Container fluid className="padding-zero">
         <Container fluid className="container-style">
         <Header />
+        <Row>
+          <Col className="mx-3">
+            <Breadcrumb>
+              <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
+              <Breadcrumb.Item active><Link to="/postJob">Post a Job</Link></Breadcrumb.Item>
+            </Breadcrumb>
+          </Col>
+        </Row>
         <Row className="justify-content-md-center">
           <Col xs={6} md="auto">
           { false 

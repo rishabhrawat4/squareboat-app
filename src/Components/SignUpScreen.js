@@ -66,6 +66,7 @@ class SignUpScreen extends React.Component{
                   <Form.Control 
                     className={this.props.signUp.signUpFailed ? "border-error" : null}
                     type="text" 
+                    value={this.props.signUp.fullName}
                     placeholder="Enter Fullname" 
                     onChange={(e) => this.props.fullNameInputAction(e.target.value)}
                   />
@@ -75,6 +76,7 @@ class SignUpScreen extends React.Component{
                   <Form.Control 
                     className={this.props.signUp.signUpFailed ? "border-error" : null}
                     type="email" 
+                    value={this.props.signUp.email}
                     placeholder="Enter email" 
                     onChange={(e) => this.props.emailInputAction(e.target.value)} 
                   />
@@ -85,6 +87,7 @@ class SignUpScreen extends React.Component{
                 <Form.Control 
                   className={this.props.signUp.signUpFailed ? "border-error" : null}
                   type="password"
+                  value={this.props.signUp.password}
                   placeholder="Password" 
                   onChange={(e) => this.props.passwordInputAction(e.target.value)}
                 />
@@ -96,6 +99,7 @@ class SignUpScreen extends React.Component{
                   className={this.props.signUp.signUpFailed ? "border-error" : null}
                   type="password"
                   placeholder="Confirm Password" 
+                  value={this.props.signUp.confirmPassword}
                   onChange={(e) => this.props.confirmPasswordInputAction(e.target.value)}
                 />
               </Form.Group>
@@ -106,6 +110,7 @@ class SignUpScreen extends React.Component{
                   className={this.props.signUp.signUpFailed ? "border-error" : null}
                   type="text"
                   placeholder="Skills" 
+                  value={this.props.signUp.skills}
                   onChange={(e) => this.props.skillsInputAction(e.target.value)}
                 />
               </Form.Group>

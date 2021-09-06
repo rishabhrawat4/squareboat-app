@@ -16,7 +16,6 @@ const RecruiterGetJobApi = async (token) => {
   .catch(err => {
     resp = null;
   })
-  console.log('response here: ', resp)
   return resp;
 } 
 

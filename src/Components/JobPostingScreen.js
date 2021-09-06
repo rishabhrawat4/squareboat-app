@@ -42,7 +42,6 @@ class JobPostingScreen extends React.Component {
   }
 
   onButtonClicked = (jobId) => {
-    console.log(jobId)
     this.props.showApplicationsAction(jobId)
   }
   

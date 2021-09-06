@@ -27,10 +27,8 @@ class ApplicationScreen extends React.Component {
     resp = JobCandidatesApi(this.props.login.loginData.token, this.props.getJob.jobId)
     resp.then((result) => {
       if(result){
-        console.log(result)
       }
       else if(result == undefined){
-        console.log("No candidates have applied for the job posting")
       }
     })
   }
