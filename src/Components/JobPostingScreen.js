@@ -73,7 +73,7 @@ class JobPostingScreen extends React.Component {
   handlePageClick = (e) => {
     var resp = GetJobApi(e.selected+1);
     resp.then((result) => {
-      this.props.getJobDataAction(result.data)
+      this.props.getJobDataAction({data: result.data, totalCount: result.totalCount})
     })
   }
   render(){
