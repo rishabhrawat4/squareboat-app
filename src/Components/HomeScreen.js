@@ -126,7 +126,8 @@ class HomeScreen extends React.Component{
           <Header />
           { this.props.login.hasLogin 
           ?
-          <JobPostingScreen /> 
+            
+            <JobPostingScreen /> 
           :
           this.renderHomeScreen()
           }

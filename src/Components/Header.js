@@ -32,7 +32,7 @@ class Header extends React.Component{
               </Nav.Link>
               :
               <Navbar.Text>
-                { this.props.login.hasLogin && this.props.login.loginData.userRole === 1 
+                { this.props.login.hasLogin && this.props.login.loginData.userRole === 0 
                 ?
                 <Link to='/postJob' className="header-content mx-3"><span style={{ color: "white"}}>Post A job</span></Link>
                 :

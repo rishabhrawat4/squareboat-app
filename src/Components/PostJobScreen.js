@@ -2,28 +2,34 @@ import React from 'react';
 import { Container, Card, Button, Row, Col, Form, InputGroup, Alert, Spinner } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Style/HomeScreenStyle.css";
-import { userTypeInputAction, fullNameInputAction, emailInputAction, passwordInputAction, confirmPasswordInputAction, skillsInputAction, signUpFailedAction, signUpSuccessAction } from '../Actions/SignUpActions'
-import { loginDataAction } from '../Actions/LoginAction';
 import { connect } from "react-redux";
-import RegisterApi from '../Api/RegisterApi';
 import "./Style/HomeScreenStyle.css";
 import { withRouter } from 'react-router-dom';
 import Header from './Header';
+import PostJobApi from '../Api/PostJobApi';
+import { jobTitleInputAction, 
+  descriptionInputAction, 
+  locationInputAction, 
+  successPostJobAction, 
+  failurePostJobAction 
+} from '../Actions/PostJobAction'
 
 class PostJobScreen extends React.Component{
 
   onSignUpButtonClicked = () => {
-    const resp = RegisterApi(parseInt(this.props.signUp.userType), this.props.signUp.fullName, this.props.signUp.email, this.props.signUp.password, this.props.signUp.confirmPassword, this.props.signUp.skills)
+    const resp = PostJobApi(this.props.login.loginData.token, this.props.postJob.jobTitle, this.props.postJob.description, this.props.postJob.location)
+    
     resp.then((result) => {
       if(result){
-        this.props.loginDataAction(result)
-        this.props.signUpSuccessAction()
+        this.props.successPostJobAction()
         this.props.history.push('/')
       } else{
-        this.props.signUpFailedAction(true)
+        this.props.failurePostJobAction()
+        console.log(this.props.postJob)
       }
-        
+       
     })
+    
   }
   render(){
     return (
@@ -45,29 +51,32 @@ class PostJobScreen extends React.Component{
               <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Job Title</Form.Label>
                   <Form.Control 
-                    className={this.props.signUp.signUpFailed ? "border-error" : null}
+                    className={this.props.postJob.hasFailedPostJob ? "border-error" : null}
                     type="text" 
                     placeholder="Enter Job Title" 
-                    onChange={(e) => this.props.fullNameInputAction(e.target.value)}
+                    value={this.props.postJob.jobTitle}
+                    onChange={(e) => this.props.jobTitleInputAction(e.target.value)}
                   />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Description</Form.Label>
                   <Form.Control 
-                    className={this.props.signUp.signUpFailed ? "border-error" : null}
+                    className={this.props.postJob.hasFailedPostJob ? "border-error" : null}
                     type="text" 
+                    value={this.props.postJob.description}
                     placeholder="Enter Job Description" 
-                    onChange={(e) => this.props.emailInputAction(e.target.value)} 
+                    onChange={(e) => this.props.descriptionInputAction(e.target.value)} 
                   />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Location</Form.Label>
                 <Form.Control 
-                  className={this.props.signUp.signUpFailed ? "border-error" : null}
+                  className={this.props.postJob.hasFailedPostJob ? "border-error" : null}
                   type="text"
+                  value={this.props.postJob.location}
                   placeholder="Enter Location" 
-                  onChange={(e) => this.props.passwordInputAction(e.target.value)}
+                  onChange={(e) => this.props.locationInputAction(e.target.value)}
                 />
               </Form.Group>
 
@@ -89,10 +98,16 @@ class PostJobScreen extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  signUp: state.signUp
+  postJob: state.postJob,
+  login: state.login
 });
 
 const mapDispatchToProps = dispatch => ({
+  jobTitleInputAction: (payload) => dispatch(jobTitleInputAction(payload)),
+  descriptionInputAction: (payload) => dispatch(descriptionInputAction(payload)),
+  locationInputAction: (payload) => dispatch(locationInputAction(payload)),
+  successPostJobAction: () => dispatch(successPostJobAction()),
+  failurePostJobAction: () => dispatch(failurePostJobAction()),
 
 });
 

@@ -19,10 +19,26 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import GetJobApi from '../Api/GetJobApi';
 import { getJobDataAction, hideApplicationsAction } from '../Actions/GetJobActions';
-
+import JobCandidatesApi from '../Api/JobCandidatesApi';
 class ApplicationScreen extends React.Component {
 
-  
+  componentDidMount(){
+    var resp = null;
+    resp = JobCandidatesApi(this.props.login.loginData.token, this.props.getJob.jobId)
+    resp.then((result) => {
+      if(result){
+        console.log(result)
+      }
+      else if(result == undefined){
+        console.log("No candidates have applied for the job posting")
+      }
+    })
+  }
+  renderApplication = () => {
+    return (
+      <div>Hello</div>
+    )
+  }
   render(){
     return (
       <Container className="main-container">

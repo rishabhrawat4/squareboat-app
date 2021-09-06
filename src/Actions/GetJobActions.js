@@ -5,9 +5,10 @@ export const getJobDataAction = (val) => {
   }
 }
 
-export const showApplicationsAction = () => {
+export const showApplicationsAction = (val) => {
   return {
     type: 'showApplications',
+    payload: val
   }
 }
 
@@ -21,5 +22,11 @@ export const setTotalCountAction = (val) => {
   return {
     type: 'setTotalCount',
     payload: val
+  }
+}
+
+export const errorJobDataAction = () => {
+  return {
+    type: 'errorJobData',
   }
 }

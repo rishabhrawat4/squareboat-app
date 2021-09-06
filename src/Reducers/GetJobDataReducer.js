@@ -1,19 +1,28 @@
 const INITIAL_STATE = {
   jobDataArray: null,
   showApplication: false,
-  totalCount: 0
+  totalCount: 0,
+  jobId: null
 }
 const GetJobDataReducer = (state = INITIAL_STATE, action) => {
   switch(action.type){
     case "getJobData":
       return {
         ...state,
-        jobDataArray: action.payload
+        jobDataArray: action.payload.data,
+        totalCount: action.payload.totalCount
+      };
+    case "errorJobData":
+      return {
+        ...state,
+        jobDataArray: null,
+        totalCount: 0
       };
     case "showApplications":
       return {
         ...state,
-        showApplication: true
+        showApplication: true,
+        jobId: action.payload
       };
     case "hideApplications":
       return {

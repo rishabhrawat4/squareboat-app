@@ -15,23 +15,35 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import GetJobApi from '../Api/GetJobApi';
-import { getJobDataAction, showApplicationsAction, setTotalCountAction } from '../Actions/GetJobActions';
+import { getJobDataAction, showApplicationsAction, setTotalCountAction, errorJobDataAction } from '../Actions/GetJobActions';
 import ApplicationScreen from './ApplicationScreen';
 import ReactPaginate from 'react-paginate';
 import './Style/JobPostingScreenStyle.css';
+import RecruiterGetJobApi from '../Api/RecruiterGetJobApi';
 
 class JobPostingScreen extends React.Component {
   componentDidMount(){
-    var resp = GetJobApi(1);
-    resp.then((result) => {
-      this.props.getJobDataAction(result.data)
-      this.props.setTotalCountAction(result.totalCount)
-    })
+    var resp = null;
+    if(this.props.login.loginData.userRole === 0){
+      resp = RecruiterGetJobApi(this.props.login.loginData.token);
+    }else{
+      resp = GetJobApi(1);
+    }
     
+    resp.then((result) => {
+      if(result){
+        this.props.getJobDataAction({data: result.data, totalCount: result.totalCount})
+        // this.props.setTotalCountAction(result.totalCount)
+      } else {
+        this.props.errorJobDataAction()
+      }
+      
+    })
   }
 
-  onButtonClicked = () => {
-    this.props.showApplicationsAction()
+  onButtonClicked = (jobId) => {
+    console.log(jobId)
+    this.props.showApplicationsAction(jobId)
   }
   
   renderItems = (item) => {
@@ -44,10 +56,14 @@ class JobPostingScreen extends React.Component {
             {item.description}
           </Card.Text>
           <Card.Text href="#">{item.location}</Card.Text>
-          {/* <Card.Link href="#">Another Link</Card.Link> */}
-          <Button variant="primary" type="button" onClick={this.onButtonClicked}>
-          View Application
-        </Button>
+          { this.props.login.loginData.userRole == 0 
+          ?
+          <Button variant="primary" type="button" onClick={() => this.onButtonClicked(item.id)}>
+            View Application
+          </Button>
+          :
+          null
+          }
         </Card.Body>
 
       </Card>
@@ -93,6 +109,7 @@ class JobPostingScreen extends React.Component {
         null
         }
 
+        { this.props.getJob.totalCount ?
         <div className="paginate-container">
           <ReactPaginate
             previousLabel={"<< Prev"}
@@ -108,6 +125,12 @@ class JobPostingScreen extends React.Component {
             activeClassName={"active"}
           />
         </div>
+        :
+        <div className="my-3 empty-application">
+          <span className="mx-3">Your posted jobs will be shown here</span>
+          <Button onClick={() => this.props.history.push('/postJob')}>Post a Job</Button>
+        </div>
+        }
       </Container>
       
     )
@@ -121,8 +144,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getJobDataAction: (payload) => dispatch(getJobDataAction(payload)),
-  showApplicationsAction: () => dispatch(showApplicationsAction()),
-  setTotalCountAction: (payload) => dispatch(setTotalCountAction(payload))
+  showApplicationsAction: (payload) => dispatch(showApplicationsAction(payload)),
+  setTotalCountAction: (payload) => dispatch(setTotalCountAction(payload)),
+  errorJobDataAction: () => dispatch(errorJobDataAction())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(JobPostingScreen));

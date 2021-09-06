@@ -46,16 +46,16 @@ class SignUpScreen extends React.Component{
                 <Form.Check
                   inline
                   label="Recruiter"
-                  value={1}
+                  value={0}
                   name="group1"
-                  checked={this.props.signUp.userType == 1}
+                  checked={this.props.signUp.userType == 0}
                   type='radio'
                   onChange={(e) => this.props.userTypeInputAction(e.target.value)}
                 />
                 <Form.Check
                   inline
                   label="Candidate"
-                  value={2}
+                  value={1}
                   name="group1"
                   type='radio'
                   onChange={(e) => this.props.userTypeInputAction(e.target.value)}
