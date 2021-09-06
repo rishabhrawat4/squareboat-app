@@ -28,7 +28,7 @@ class Header extends React.Component{
           <Navbar.Collapse className="justify-content-end">
             { !this.props.login.hasLogin ?
               <Nav.Link>
-                <Link to='/login' className="header-content mx-3">Login</Link>
+                <Link to='/login' className="header-content mx-3">Login / SignUp</Link>
               </Nav.Link>
               :
               <Navbar.Text>
